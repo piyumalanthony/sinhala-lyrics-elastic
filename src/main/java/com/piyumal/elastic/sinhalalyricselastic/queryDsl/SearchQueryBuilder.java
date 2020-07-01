@@ -22,17 +22,18 @@ public class SearchQueryBuilder {
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
     IndexCoordinates index = IndexCoordinates.of("songs");
     public SearchScrollHits<Lyrics> getAll(String text){
+        text = text.trim();
         QueryBuilder query = QueryBuilders.boolQuery()
-                .should(QueryBuilders.queryStringQuery(text).lenient(true).field("track_name_en").field("track_name_si",10.0f)
-                        .field("album_name_en").field("album_name_si",2.0f).field("artist_name_en").field("artist_name_si",50.0f)
-                .field("lyrics",10.0f).fuzziness(Fuzziness.AUTO).analyzeWildcard(true).analyzer("keyword"))
+                .should(QueryBuilders.queryStringQuery(text).lenient(true).field("track_name_en").field("track_name_si",300.0f)
+                        .field("album_name_en").field("album_name_si",2.0f).field("artist_name_en").field("artist_name_si",500.0f)
+                .field("lyrics",50.0f).fuzziness(Fuzziness.AUTO).analyzeWildcard(true).analyzer("keyword"))
                 .should(QueryBuilders.queryStringQuery("*"+text+"*")
-                .lenient(true).field("track_name_en").field("track_name_si",10.0f)
-                .field("album_name_en").field("album_name_si",2.0f).field("artist_name_en").field("artist_name_si")
-                .field("lyrics",10.0f).fuzziness(Fuzziness.AUTO).analyzeWildcard(true).analyzer("pattern"))
-                .should(QueryBuilders.multiMatchQuery(text).field("track_name_en").field("track_name_si",10.0f)
-                        .field("album_name_en").field("album_name_si",10.0f).field("artist_name_en").field("artist_name_si",10.0f)
-                        .field("lyrics",10.0f).fuzziness(Fuzziness.AUTO).type(MultiMatchQueryBuilder.Type.BEST_FIELDS).analyzer("keyword"));
+                .lenient(true).field("track_name_en").field("track_name_si",300.0f)
+                .field("album_name_en").field("album_name_si",2.0f).field("artist_name_en").field("artist_name_si",500.0f)
+                .field("lyrics",150.0f).fuzziness(Fuzziness.AUTO).analyzeWildcard(true).analyzer("pattern"))
+                .should(QueryBuilders.multiMatchQuery(text).field("track_name_en").field("track_name_si",300.0f)
+                        .field("album_name_en").field("album_name_si",10.0f).field("artist_name_en").field("artist_name_si",500.0f)
+                        .field("lyrics",50.0f).fuzziness(Fuzziness.AUTO).type(MultiMatchQueryBuilder.Type.BEST_FIELDS).analyzer("keyword"));
         NativeSearchQuery nativeSearchQuery = new NativeSearchQueryBuilder().withQuery(query).build();
         SearchScrollHits<Lyrics> lyrics = elasticsearchRestTemplate.searchScrollStart(1000, nativeSearchQuery, Lyrics.class, index);
         return lyrics;
