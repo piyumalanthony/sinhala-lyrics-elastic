@@ -18,6 +18,8 @@ o	Frontend – simple frontend implementation for search engine
 
 4. Open index.html file in the frontend directory to search lyrics.
 ## Song corpus
+
+The following metadata were included in the corpus with lyrics.
 •	track_id – unique identifier for the music track
 
 •	sinhala_track_name  – Sinhala track name
@@ -45,4 +47,3 @@ o	Frontend – simple frontend implementation for search engine
 |  http://localhost:8080/manual/search | GET | Query parameter    | http://localhost:8080/manual/search?id= අම්මා | Retrive lyrics realted to user query|
 |http://localhost:8080/rest/search/findAll' | GET |  ---  |http://localhost:8080/rest/search/findAll' | Retrive all the lyrics in the corpus |
 |http://localhost:8080/manual/search/lyrics'|PUT|---   |http://localhost:8080/manual/search/lyrics'| Add lyrics to the elastic database|
-## implementation details
