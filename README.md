@@ -20,19 +20,19 @@ o	Frontend – simple frontend implementation for search engine
 ## Song corpus
 •	track_id – unique identifier for the music track
 
-•	track_name – Sinhala track name
+•	sinhala_track_name  – Sinhala track name
 
-•	track_name_english – track name in Singlish
+•	singlish_track_name  – track name in Singlish
 
 •	track_rating – user rating for the track
 
-•	album_name – the album where the song was included
+•	sinhala_album_name  – the album where the song was included
 
-•	album_name_english – the name of the album where the song was included
+•	singlish_album_name  – the name of the album where the song was included
 
-•	artist_name – name of the artist who belongs the song
+•	sinhala_artist_name  – name of the artist who belongs the song
 
-•	artist_name_english – artist name in Singlish
+•	singlish_artist_name – artist name in Singlish
 
 •	artist_rating – rating of the artist
 
